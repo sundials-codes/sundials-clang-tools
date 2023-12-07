@@ -53,10 +53,13 @@ public:
       rso << ", __LINE__";
       rso << ", __func__";
       rso << ", __FILE__";
-      rso << ", "
-          << Lexer::getSourceText(
-                 CharSourceRange::getTokenRange(E->getArg(4)->getSourceRange()),
-                 TheRewriter.getSourceMgr(), TheRewriter.getLangOpts());
+      // Skip the original arguments 2 and 3, those are the ones we are replacing.
+      for (int i = 4; i < E->getNumArgs(); i++) {
+        rso << ", "
+            << Lexer::getSourceText(
+                  CharSourceRange::getTokenRange(E->getArg(i)->getSourceRange()),
+                  TheRewriter.getSourceMgr(), TheRewriter.getLangOpts());
+      }
       rso << ")";
 
       if (!rewrite) {
