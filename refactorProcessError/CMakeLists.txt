@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(MyClangTool)
+project(refactor-process-error)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -15,12 +15,11 @@ include_directories(${LLVM_INCLUDE_DIRS} ${CLANG_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS} ${CLANG_DEFINITIONS})
 
 # specify the source files
-set(SOURCE_FILES refactor.cpp)
-# set(SOURCE_FILES transformer.cpp)
+set(SOURCE_FILES refactorProcessError.cpp)
 
 # add the executable
-add_executable(MyClangTool ${SOURCE_FILES})
+add_executable(refactor-process-error ${SOURCE_FILES})
 
 # link LLVM and Clang libraries
 llvm_map_components_to_libnames(LLVM_LIBS support core irreader)
-target_link_libraries(MyClangTool ${LLVM_LIBS} clangTooling clangASTMatchers)
+target_link_libraries(refactor-process-error ${LLVM_LIBS} clangTooling clangASTMatchers)
